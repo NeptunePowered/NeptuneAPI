@@ -24,9 +24,6 @@
 package org.neptunepowered.lib.factory;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
-import net.canarymod.Canary;
 import net.canarymod.api.PlayerReference;
 import org.neptunepowered.lib.ban.Ban;
 import org.neptunepowered.lib.ban.BanBuilder;
@@ -36,14 +33,6 @@ import java.net.InetAddress;
 import java.util.Date;
 
 public class BanFactory {
-
-    private static BiMap<BanType, net.canarymod.bansystem.BanType> map =
-            ImmutableBiMap.<BanType, net.canarymod.bansystem.BanType>builder()
-                    .put(BanType.PLAYER, net.canarymod.bansystem.BanType.UUID)
-                    .put(BanType.IP, net.canarymod.bansystem.BanType.IP)
-                    .build();
-
-    protected BanFactory() { }
 
     public BanBuilder builder() {
         return new BanBuilder() {
@@ -94,7 +83,7 @@ public class BanFactory {
             public Ban build() {
                 switch (banType) {
                     case IP:
-                        return new Ban.IP() {
+                        return new Ban.Ip() {
                             @Override
                             public InetAddress getAddress() {
                                 return address;
@@ -160,21 +149,5 @@ public class BanFactory {
                 }
             }
         };
-    }
-
-    public void issueBan(Ban ban) {
-        net.canarymod.bansystem.Ban cBan = new net.canarymod.bansystem.Ban();
-        cBan.setIssuedDate(ban.getStartDate().getTime());
-        cBan.setReason(ban.getReason());
-        cBan.setBanType(map.get(ban.getBanType()));
-        if (ban.getExpirationDate().isPresent()) {
-            cBan.setExpiration(ban.getExpirationDate().get().getTime());
-        }
-        if (ban instanceof Ban.IP) {
-            cBan.setIp(((Ban.IP) ban).getAddress().getCanonicalHostName());
-        } else if (ban instanceof Ban.Player) {
-            cBan.setSubject(((Ban.Player) ban).getPlayer().getName());
-        }
-        Canary.bans().issueBan(cBan);
     }
 }

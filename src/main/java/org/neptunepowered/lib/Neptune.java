@@ -25,13 +25,19 @@ package org.neptunepowered.lib;
 
 import net.canarymod.plugin.Plugin;
 import org.neptunepowered.lib.factory.Factory;
+import org.neptunepowered.lib.service.Service;
 
 public class Neptune extends Plugin {
 
     private static Factory factory = new Factory();
+    private static Service service = new Service();
 
     public static Factory getFactory() {
         return factory;
+    }
+
+    public static Service getService() {
+        return service;
     }
 
     @Override

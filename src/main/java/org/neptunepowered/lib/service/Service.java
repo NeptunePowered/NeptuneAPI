@@ -21,37 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.neptunepowered.lib.ban;
+package org.neptunepowered.lib.service;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+public class Service {
 
-/**
- * Represents the possible types of bans.
- */
-public enum BanType {
+    private BanService banService = new BanService();
 
-    /**
-     * A ban made on a player
-     */
-    PLAYER,
-
-    /**
-     * A ban made on an IP
-     */
-    IP;
-
-    private static BiMap<BanType, net.canarymod.bansystem.BanType> map =
-            ImmutableBiMap.<BanType, net.canarymod.bansystem.BanType>builder()
-                    .put(BanType.PLAYER, net.canarymod.bansystem.BanType.UUID)
-                    .put(BanType.IP, net.canarymod.bansystem.BanType.IP)
-                    .build();
-
-    public net.canarymod.bansystem.BanType getCanaryType() {
-        return map.get(this);
-    }
-
-    public static BanType fromCanaryType(net.canarymod.bansystem.BanType banType) {
-        return map.inverse().get(banType);
+    public BanService getBanService() {
+        return banService;
     }
 }
