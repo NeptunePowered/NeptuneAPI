@@ -1,0 +1,4 @@
+main-class = org.neptunepowered.lib.neptune
+name = NeptuneLib
+author = Jamie Mansfield, Neptune Contributors
+version = 1.0-SNAPSHOT

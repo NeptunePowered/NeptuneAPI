@@ -5,6 +5,7 @@ apply plugin: 'eclipse'
 defaultTasks 'clean', 'build'
 
 group = 'org.neptunepowered'
+version = '1.0-SNAPSHOT'
 archivesBaseName = project.name.toLowerCase()
 
 sourceCompatibility = '1.6'
