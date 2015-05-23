@@ -67,9 +67,9 @@ uploadArchives {
 
                 project {
                     name project.archivesBaseName
-                    description project.description
+                    description "Extensions to Canarylib"
                     packaging 'jar'
-                    url project.url
+                    url "http://www.neptunepowered.org/"
 
                     scm {
                         url "https://github.com/NeptunePowered/NeptuneLib"
