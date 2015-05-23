@@ -58,8 +58,6 @@ artifacts {
 uploadArchives {
     repositories {
         mavenDeployer {
-            configuration = configurations.deployerJars
-
             repository(url: System.getenv().DEPLOY_ROOT + "/maven_repo")
 
             pom {
