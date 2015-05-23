@@ -1,0 +1,16 @@
+sudo: false
+language: java
+jdk:
+  - openjdk6
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
+env:
+  global:
+    - LEX_DEPLOY=https://github.com/LexBot/Deploy.git DEPLOY_ROOT=/tmp/lex/deploy
+    - GIT_REPO=git@github.com:LexBot/NeptuneRepo.git
+    - secure: "Yn0JOCyTMqmVZGrdAtzRZuD0GxUc3ar7XVRqRvrxn/sn5HJuqi2Nxxvk7RqIrYwbinHiUCZNgU8g+rq7pp2fwk8llAdOYgr6CZME5CfBNeSWJM+/dE8RwH9gFvKopa8t6NxK2LpJ+OcrjBJARpWgCC8HBtDv7cKhuhXem8UJSqX9E8ar/kZmOrS/yRfPCsUf+skBnuMSXqNZqhiR8D4oOhJ+rt1jFuCbfb0S9rqIsbXv+gatfCyxYIBVfnKUT9xCJ0wLR+s9y0rm/jypgXgQ5EdbsdHBUmq5b8c0plW4WJdmUpmqWpiFbz8m19juuMPRUxgfeJZzxZwtRiN9f9/riOBNieqVYQOdKm/rsvA65+zwrf8hZpcPYafLXmlCFJaQbCtsruNbPkl35d0Lwy5OmfeUWUCYtGSgZCt8C9lthmRwP/RC404JUoeWjJrFu1WbqJ8mf4BAot6M1FK4vWxTv4cm1uWJ691ep4ZGTc3wHY+dcORBu/WR/YfBAoWfOdZwVkBenqpvbDRVjdC+kba24r6wV8mI/crJbtfrLL0xDfD73B/5QW/LSZNxC0rl6tvgExNURl9A1q326wucFCwDavudKEkB6hyL988GTi3YpPtfAZtQLq2iWn4h/YsUKThCK3coX9l+ZTvF90vtojGhX0n9hZt7jB8/EYi/w0pnNrg="
+after_success:
+  - git clone $LEX_DEPLOY $DEPLOY_ROOT && $DEPLOY_ROOT/maven_repo "gradle publish"
+notifications:
+  email: false

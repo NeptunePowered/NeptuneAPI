@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
@@ -52,6 +53,43 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourceJar
     archives javadocJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+
+            repository(url: System.getenv().DEPLOY_ROOT + "/maven_repo")
+
+            pom {
+                groupId = project.group
+                artifactId = project.archivesBaseName
+                version = project.version
+
+                project {
+                    name project.archivesBaseName
+                    description project.description
+                    packaging 'jar'
+                    url project.url
+
+                    scm {
+                        url "https://github.com/NeptunePowered/NeptuneLib"
+                        connection "scm:git:https://github.com/NeptunePowered/NeptuneLib.git"
+                        developerConnection "scm:git:git@github.com:NeptunePowered/NeptuneLib.git"
+                    }
+
+                    licenses {
+                        license {
+                            name 'MIT License'
+                            url 'http://opensource.org/licenses/MIT'
+                            distribution 'repo'
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {

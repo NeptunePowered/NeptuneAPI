@@ -108,7 +108,7 @@ public class BanService {
      * @param player The player
      */
     public void pardon(PlayerReference player) {
-        Canary.bans().unban(player.getName());
+        Canary.bans().unban(player);
     }
 
     /**
