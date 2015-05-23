@@ -19,6 +19,9 @@ repositories {
         url = 'http://repo.visualillusionsent.net/repository/public/'
     }
     maven {
+        url "https://libraries.minecraft.net"
+    }
+    maven {
         name = 'mcstats.org releases'
         url = 'http://repo.mcstats.org/content/repositories/releases/'
     }
